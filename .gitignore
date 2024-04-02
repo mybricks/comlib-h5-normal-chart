@@ -1,0 +1,17 @@
+.git/
+.idea/
+.DS_Store
+node_modules
+/src/**/*.js
+tags/*
+.history
+.vscode/
+.temp
+.temp-pub/
+.debugger
+yarn.lock
+package-lock.json
+coverage
+dist
+.stark_storage.json
+.temp-entry-items

@@ -1,0 +1,17 @@
+{
+  "componentType": "MP",
+  "comAry": [
+    {
+      "title": "图表",
+      "comAry": [
+        "./src/chart-column/com.json",
+        "./src/chart-line/com.json",
+        "./src/chart-pie/com.json",
+        "./src/chart-radar/com.json"
+      ]
+    }
+  ],
+  "namespace": "mybricks.normal-chart.taro",
+  "userName": "moyukai05",
+  "tags": "react"
+}
