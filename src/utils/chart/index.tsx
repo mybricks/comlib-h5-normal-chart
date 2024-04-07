@@ -83,15 +83,21 @@ export const useChart = (env) => {
     return isDesigner(env) ? e => {} : e => canvasEl.current?.dispatchEvent(type, wrapEvent(e))
   }, [])
 
+  const events = useMemo(() => {
+    return {
+      onClick: handleEvent('click'),
+      onTouchStart: handleEvent('touchstart'),
+      onTouchMove: handleEvent('touchmove'),
+      onTouchEnd: handleEvent('touchend'),
+    }
+  }, []);
+
   return {
     chart,
     id: chartId.current,
     type: '2d',
     Canvas,
-    onClick: handleEvent('click'),
-    onTouchStart: handleEvent('touchstart'),
-    onTouchMove: handleEvent('touchmove'),
-    onTouchEnd: handleEvent('touchend'),
+    events,
   }
 }
 

@@ -14,13 +14,15 @@ export const ChartStatus = ({
   className,
   children,
   status = LoadStatus.IDLE,
+  ...props
 }: {
   className?;
   children?;
   status?;
+  [keyname: string]: any
 }) => {
   return (
-    <View className={`${css.chart_wrap} ${className}`}>
+    <View className={`${css.chart_wrap} ${className}`} {...props}>
       {status === LoadStatus.LOADING && <Loading />}
       {status === LoadStatus.NOMORE && <Empty />}
       {children}

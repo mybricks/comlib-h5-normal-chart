@@ -1,6 +1,6 @@
 {
   "name": "@mybricks/ktaro-chart-lib",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "小程序图表组件库",
   "scripts": {
     "dev": "mybricks dev",
@@ -18,7 +18,6 @@
     "@tarojs/components": "3.6.13",
     "@tarojs/react": "^3.6.13",
     "@tarojs/taro-h5": "3.6.13",
-    "brickd-mobile": "^0.0.38",
     "classnames": "^2.3.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

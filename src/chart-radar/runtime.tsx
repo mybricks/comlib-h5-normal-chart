@@ -13,7 +13,7 @@ export default function ({
   style,
   mockData = [],
 }) {
-  const { chart, Canvas, ...props } = useChart(env);
+  const { chart, Canvas, events, ...props } = useChart(env);
 
   const [dataSource, setDataSource] = useState(env.edit ? mockData : []);
   const [status, setStatus] = useState(LoadStatus.IDLE);
@@ -117,7 +117,7 @@ export default function ({
   ]);
 
   return (
-    <ChartStatus status={status}>
+    <ChartStatus status={status} {...events}>
       <Canvas className={css.chart_line} {...props} />
     </ChartStatus>
   );
