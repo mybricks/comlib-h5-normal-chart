@@ -11,6 +11,8 @@ export enum LineChartType {
 
 export enum PieChartType {
   Pie = 'pie',
+  /** 环形图 */
+  Circle = 'circle'
 }
 
 export enum RadarChartType {

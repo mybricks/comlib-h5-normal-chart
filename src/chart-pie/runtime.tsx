@@ -61,10 +61,19 @@ export default function ({
     chart.source(_data);
     
     chart.tooltip(false);
-    chart.coord('polar', {
-      transposed: true,
-      radius: 0.85
-    });
+    if (data.type === ChartType.Circle) {
+      chart.coord('polar', {
+        transposed: true,
+        innerRadius: data.innerRadius ?? 0.7,
+        radius: data.radius ?? 1
+      });
+    } else if (data.type === ChartType.Pie) {
+      chart.coord('polar', {
+        transposed: true,
+        radius: data.radius ?? 1
+      });
+    }
+    
     chart.axis(false);
 
     chart
@@ -85,6 +94,28 @@ export default function ({
         }
       });
 
+    if (data.guide?.open && data.type === ChartType.Circle) {
+      chart.guide().text({
+        position: ['50%', '46%'],
+        content: data.guide?.title,
+        style: {
+          fontSize: 13,
+          textAlign: 'center',
+          fill: '#8C8C8C',
+        }
+      })
+      chart.guide().text({
+        position: ['50%', '54%'],
+        content: 300,
+        style: {
+          fontSize: 24,
+          textAlign: 'center',
+          fontWeight: 500,
+          fill: '#1F1F1F',
+        }
+      })
+    }
+
     const legendConfig = getLegendFromData(data.config?.legend)
     if (!legendConfig) {
       chart.legend(false);
@@ -93,7 +124,7 @@ export default function ({
     }
 
     chart.render();
-  }, [chart, dataSource, data.config.xField, data.config.yField, data.config?.legend]);
+  }, [chart, dataSource, data.type, data.radius, data.innerRadius, data.config.xField, data.config.yField, data.config?.legend, data.guide, data.guide?.open, data.guide?.title]);
 
   return (
     <ChartStatus status={status} {...events}>
