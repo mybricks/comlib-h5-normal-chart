@@ -69,6 +69,18 @@ export const getNormalDataEditors = ({
         }
       },
       {
+        title: "x横轴支持平移",
+        type: "Switch",
+        value: {
+          get({ data }) {
+            return data.config.xFieldScrollable;
+          },
+          set({ data }, value) {
+            data.config.xFieldScrollable = value;
+          }
+        }
+      },
+      {
         title: 'y纵轴字段名',
         type: 'Text',
         description: '纵轴映射对应的数据字段名',

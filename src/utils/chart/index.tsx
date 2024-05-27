@@ -2,6 +2,10 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from "react"
 import { Canvas as TaroCanvas } from "@tarojs/components";
 import * as Taro from "@tarojs/taro";
 import F2 from '@antv/f2';
+import ScrollBar from '@antv/f2/lib/plugin/scroll-bar';
+import Pan from '@antv/f2/lib/interaction/pan';
+
+F2.Chart.registerInteraction("pan", Pan);
 
 export * from './config';
 
@@ -37,7 +41,7 @@ const getCanvasInDesn = async (el: HTMLElement) => {
   return Promise.resolve({
     el,
     width,
-    height
+    height,
   })
 }
 
@@ -56,7 +60,10 @@ export const useChart = (env) => {
 
     ;(async() => {
       const options = await (isDesigner(env) ? getCanvasInDesn(chartEl.current) : getCanvasInTaro(chartId.current));
-      _chart.ref = new F2.Chart(options)
+      _chart.ref = new F2.Chart({
+        ...options,
+        plugins: [ScrollBar],
+      })
 
       if (!_chart.ref) {
         return

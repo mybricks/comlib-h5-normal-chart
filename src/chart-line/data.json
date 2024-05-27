@@ -10,7 +10,8 @@
     },
     "seriesField": "",
     "padding": "auto",
-    "label": false
+    "label": false,
+    "xFieldScrollable": false
   },
   "geo": {
     "line": {
