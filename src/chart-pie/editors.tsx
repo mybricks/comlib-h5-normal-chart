@@ -68,21 +68,21 @@ export default {
               }
             }
           },
-          {
-            title: '标题文本',
-            type: 'text',
-            ifVisible({ data }: EditorResult<Data>) {
-              return !!data.guide?.open
-            },
-            value: {
-              get({ data }: EditorResult<Data>) {
-                return data.guide?.title;
-              },
-              set({ data, input, output }: EditorResult<Data>, value: string) {
-                data.guide.title = value
-              }
-            }
-          },
+          // {
+          //   title: '标题文本',
+          //   type: 'text',
+          //   ifVisible({ data }: EditorResult<Data>) {
+          //     return !!data.guide?.open
+          //   },
+          //   value: {
+          //     get({ data }: EditorResult<Data>) {
+          //       return data.guide?.title;
+          //     },
+          //     set({ data, input, output }: EditorResult<Data>, value: string) {
+          //       data.guide.title = value
+          //     }
+          //   }
+          // },
         ]
       }
     ];
