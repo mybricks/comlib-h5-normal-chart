@@ -24,5 +24,6 @@
     "area": {
       "show": false
     }
-  }
+  },
+  "useCustomTooltip": false
 }

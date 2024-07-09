@@ -49,12 +49,14 @@ export default function ({
     let sourceParams = {};
     if (data.config.xFieldScrollable) {
       sourceParams[data.config.xField] = {
-        values: (env.edit ? mockData : dataSource).slice(0, 10).map((d) => d[data.config.xField]),
+        values: (env.edit ? mockData : dataSource)
+          .slice(0, 10)
+          .map((d) => d[data.config.xField]),
       };
     }
 
     chart.source(env.edit ? mockData : dataSource, {
-      ...sourceParams
+      ...sourceParams,
     });
 
     const { legend } = getChartConfigFromData(data);
@@ -108,6 +110,19 @@ export default function ({
         mode: "x",
         xStyle: {
           offsetY: -5,
+        },
+      });
+    }
+
+    if (data.useCustomTooltip) {
+      // 自定义 tooltip
+      chart.tooltip({
+        custom: true,
+        onShow: (ev) => {
+          outputs["onTooltipShow"]?.(ev.items[0]);
+        },
+        onHide: () => {
+          outputs["onTooltipHide"]?.();
         },
       });
     }
