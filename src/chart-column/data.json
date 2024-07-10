@@ -11,6 +11,8 @@
     "seriesField": "",
     "padding": "auto",
     "label": false,
+    "xFieldScrollable": false,
     "smooth": false
-  }
+  },
+  "useCustomTooltip": false
 }

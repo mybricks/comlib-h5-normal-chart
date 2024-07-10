@@ -1,10 +1,14 @@
-import { getNormalDataEditors, getLegendEditors, getChartTypeEditors } from './../utils/editor'
-import { ChartType } from './../types'
+import {
+  getNormalDataEditors,
+  getLegendEditors,
+  getChartTypeEditors,
+} from "./../utils/editor";
+import { ChartType } from "./../types";
 
 export default {
   "@init"({ style }) {
     style.height = 400;
-    style.width = '100%';
+    style.width = "100%";
   },
   "@resize": {
     options: ["width", "height"],
@@ -15,27 +19,63 @@ export default {
       getChartTypeEditors({
         options: [
           {
-            label: '柱状图',
+            label: "柱状图",
             value: ChartType.Column,
           },
           {
-            label: '堆叠柱状图',
+            label: "堆叠柱状图",
             value: ChartType.ColumnStack,
           },
           {
-            label: '分组柱状图',
+            label: "分组柱状图",
             value: ChartType.ColumnGroup,
-          }
-        ]
+          },
+        ],
       }),
       getNormalDataEditors({}),
-      getLegendEditors({})
+      getLegendEditors({}),
+
+      {},
+      {
+        title: "自定义 Tooltip",
+        type: "switch",
+        value: {
+          get({ data }) {
+            return data.useCustomTooltip;
+          },
+          set({ data, outputs }, value) {
+            data.useCustomTooltip = value;
+
+            if (value) {
+              output.add("onTooltipShow", "Tooltip 显示", { type: "any" });
+              output.add("onTooltipHide", "Tooltip 隐藏", { type: "any" });
+            } else {
+              output.remove("onTooltipShow");
+              output.remove("onTooltipHide");
+            }
+          },
+        },
+      },
+      {
+        ifVisible({ data }) {
+          return data.useCustomTooltip;
+        },
+        title: "Tooltip 显示",
+        type: "_event",
+        options: {
+          outputId: "onTooltipShow",
+        },
+      },
+      {
+        ifVisible({ data }) {
+          return data.useCustomTooltip;
+        },
+        title: "Tooltip 隐藏",
+        type: "_event",
+        options: {
+          outputId: "onTooltipHide",
+        },
+      },
     ];
-
-    cate1.title = "样式";
-    cate1.items = [];
-
-    cate2.title = "动作";
-    cate2.items = [];
   },
 };

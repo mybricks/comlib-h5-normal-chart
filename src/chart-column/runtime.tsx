@@ -46,7 +46,18 @@ export default function ({
 
     chart.clear();
 
-    chart.source(env.edit ? mockData : dataSource);
+    let sourceParams = {};
+    if (data.config.xFieldScrollable) {
+      sourceParams[data.config.xField] = {
+        values: (env.edit ? mockData : dataSource)
+          .slice(0, 10)
+          .map((d) => d[data.config.xField]),
+      };
+    }
+
+    chart.source(env.edit ? mockData : dataSource, {
+      ...sourceParams,
+    });
 
     const { legend } = getChartConfigFromData(data);
 
@@ -64,11 +75,36 @@ export default function ({
         break;
     }
 
+    // 定义进度条
+    if (data.config.xFieldScrollable) {
+      chart.interaction("pan");
+
+      chart.scrollBar({
+        mode: "x",
+        xStyle: {
+          offsetY: -5,
+        },
+      });
+    }
+
     chart
       .interval()
       .position(`${data.config.xField}*${data.config.yField}`)
       .color(color)
       .adjust(adjust);
+
+    if (data.useCustomTooltip) {
+      // 自定义 tooltip
+      chart.tooltip({
+        custom: true,
+        onShow: (ev) => {
+          outputs["onTooltipShow"]?.(ev.items[0]);
+        },
+        onHide: () => {
+          outputs["onTooltipHide"]?.();
+        },
+      });
+    }
 
     chart.legend(...legend);
 
