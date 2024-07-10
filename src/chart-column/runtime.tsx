@@ -47,6 +47,7 @@ export default function ({
     chart.clear();
 
     let sourceParams = {};
+
     if (data.config.xFieldScrollable) {
       sourceParams[data.config.xField] = {
         values: (env.edit ? mockData : dataSource)
@@ -58,6 +59,19 @@ export default function ({
     chart.source(env.edit ? mockData : dataSource, {
       ...sourceParams,
     });
+
+    // 配置 X 轴标签的旋转角度
+    if (data.config.xFieldRotate) {
+      chart.axis(data.config.xField, {
+        label: function (text, index, total) {
+          const cfg = {
+            rotate: Math.PI / data.config.xFieldRotate, // 45度
+            textAlign: "start",
+          };
+          return cfg;
+        },
+      });
+    }
 
     const { legend } = getChartConfigFromData(data);
 

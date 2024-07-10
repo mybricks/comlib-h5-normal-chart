@@ -34,7 +34,6 @@ export default {
       }),
       getNormalDataEditors({}),
       getLegendEditors({}),
-
       {},
       {
         title: "自定义 Tooltip",
