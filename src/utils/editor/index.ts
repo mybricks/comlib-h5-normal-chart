@@ -114,7 +114,6 @@ export const getNormalDataEditors = (config) => {
           },
         },
       },
-
       {
         title: "y纵轴字段名",
         type: "Text",
@@ -126,6 +125,21 @@ export const getNormalDataEditors = (config) => {
           set({ data, input, output }: EditorResult<Data>, value: string) {
             data.config.yField = value;
             // setSchema(data, input, output);
+          },
+        },
+      },
+      {
+        ifVisible({ data }) {
+          return config.yFieldDisplay;
+        },
+        title: "Y 轴显示字段名",
+        type: "switch",
+        value: {
+          get({ data }) {
+            return data.config.yFieldDisplay;
+          },
+          set({ data }, value) {
+            data.config.yFieldDisplay = value;
           },
         },
       },

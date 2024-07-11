@@ -127,6 +127,20 @@ export default function ({
       });
     }
 
+    if (data.config.yFieldDisplay) {
+      chart.guide().text({
+        position: ["min", "max"], // 位置为 Y 轴的顶部
+        content: data.config.yField, // 名称内容
+        style: {
+          textAlign: "center",
+          textBaseline: "bottom",
+          fontSize: 12,
+          fill: "#808080",
+        },
+        offsetY: -12, // 向上偏移，避免与 Y 轴的刻度重叠
+      });
+    }
+
     if (data.useCustomTooltip) {
       // 自定义 tooltip
       chart.tooltip({
@@ -152,11 +166,15 @@ export default function ({
     data.config.xField,
     data.config.yField,
     data.config?.legend,
-    data.config?.xFieldScrollable,
 
     data.geo?.line,
     data.geo?.dot,
     data.geo?.area,
+
+    data.config.xFieldScrollable,
+    data.config.xFieldCount,
+    data.config.xFieldRotate,
+    data.config.yFieldDisplay
   ]);
 
   return (

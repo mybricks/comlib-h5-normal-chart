@@ -34,7 +34,8 @@ export default {
       }),
       getNormalDataEditors({
         xFieldRotate: true,
-        xFieldScrollable: true
+        xFieldScrollable: true,
+        yFieldDisplay: true,
       }),
       getLegendEditors({}),
       {},
