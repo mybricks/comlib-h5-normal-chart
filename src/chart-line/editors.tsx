@@ -30,7 +30,10 @@ export default {
         ],
       }),
       getGeoEditors({}),
-      getNormalDataEditors({}),
+      getNormalDataEditors({
+        xFieldRotate: true,
+        xFieldScrollable: true,
+      }),
       getLegendEditors({}),
       {},
       {

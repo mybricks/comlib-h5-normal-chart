@@ -32,7 +32,10 @@ export default {
           },
         ],
       }),
-      getNormalDataEditors({}),
+      getNormalDataEditors({
+        xFieldRotate: true,
+        xFieldScrollable: true
+      }),
       getLegendEditors({}),
       {},
       {

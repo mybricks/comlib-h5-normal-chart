@@ -43,7 +43,7 @@ export const getChartTypeEditors = ({ options }) => {
   };
 };
 
-export const getNormalDataEditors = ({}) => {
+export const getNormalDataEditors = (config) => {
   return {
     title: "数据映射",
     items: [
@@ -62,6 +62,9 @@ export const getNormalDataEditors = ({}) => {
         },
       },
       {
+        ifVisible({ data }) {
+          return config.xFieldScrollable;
+        },
         title: "x横轴支持平移",
         type: "Switch",
         value: {
@@ -74,6 +77,27 @@ export const getNormalDataEditors = ({}) => {
         },
       },
       {
+        ifVisible({ data }) {
+          return data.config.xFieldScrollable;
+        },
+        title: "每屏展示个数",
+        type: "text",
+        options: {
+          type: "number",
+        },
+        value: {
+          get({ data }) {
+            return data.config.xFieldCount;
+          },
+          set({ data }, value) {
+            data.config.xFieldCount = value;
+          },
+        },
+      },
+      {
+        ifVisible({ data }) {
+          return config.xFieldRotate;
+        },
         title: "x轴顺时针旋转角度",
         type: "radio",
         options: [

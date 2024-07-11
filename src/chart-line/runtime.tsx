@@ -50,7 +50,7 @@ export default function ({
     if (data.config.xFieldScrollable) {
       sourceParams[data.config.xField] = {
         values: (env.edit ? mockData : dataSource)
-          .slice(0, 10)
+          .slice(0, data.config.xFieldCount || 10)
           .map((d) => d[data.config.xField]),
       };
     }
