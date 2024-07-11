@@ -10,7 +10,6 @@ import * as Taro from "@tarojs/taro";
 import F2 from "@antv/f2";
 import ScrollBar from "@antv/f2/lib/plugin/scroll-bar";
 import Pan from "@antv/f2/lib/interaction/pan";
-import PieSelect from "@antv/f2/lib/interaction/pie-select";
 import PieLabel from "@antv/f2/lib/plugin/pie-label";
 
 F2.Chart.registerInteraction("pan", Pan);
