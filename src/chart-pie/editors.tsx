@@ -1,10 +1,14 @@
-import { getNormalDataEditors, getLegendEditors, getChartTypeEditors } from './../utils/editor'
-import { ChartType } from './../types'
+import {
+  getNormalDataEditors,
+  getLegendEditors,
+  getChartTypeEditors,
+} from "./../utils/editor";
+import { ChartType } from "./../types";
 
 export default {
   "@init"({ style }) {
     style.height = 400;
-    style.width = '100%';
+    style.width = "100%";
   },
   "@resize": {
     options: ["width", "height"],
@@ -15,24 +19,24 @@ export default {
       getChartTypeEditors({
         options: [
           {
-            label: '饼图',
+            label: "饼图",
             value: ChartType.Pie,
           },
           {
-            label: '环形图',
+            label: "环形图",
             value: ChartType.Circle,
-          }
-        ]
+          },
+        ],
       }),
       {
-        title: '环形半径',
-        type: 'inputNumber',
+        title: "环形半径",
+        type: "inputNumber",
         ifVisible({ data }: EditorResult<Data>) {
           return data.type === ChartType.Circle;
         },
         options: [
-          { min: 0, max: 1, step: 0.05, title: '外环半径' },
-          { min: 0, max: 1, step: 0.05, title: '内环半径' }
+          { min: 0, max: 1, step: 0.05, title: "外环半径" },
+          { min: 0, max: 1, step: 0.05, title: "内环半径" },
         ],
         value: {
           get({ data }: EditorResult<Data>) {
@@ -40,20 +44,20 @@ export default {
           },
           set({ data }: EditorResult<Data>, value: number[]) {
             [data.radius, data.innerRadius] = value;
-          }
-        }
+          },
+        },
       },
       getNormalDataEditors({}),
       getLegendEditors({}),
       {
-        title: '内容配置',
+        title: "内容配置",
         ifVisible({ data }: EditorResult<Data>) {
           return data.type === ChartType.Circle;
         },
         items: [
           {
-            title: '开启',
-            type: 'switch',
+            title: "开启",
+            type: "switch",
             value: {
               get({ data }: EditorResult<Data>) {
                 return data.guide?.open ?? false;
@@ -61,12 +65,12 @@ export default {
               set({ data, input, output }: EditorResult<Data>, value: string) {
                 if (!data.guide) {
                   data.guide = {
-                    title: '总计',
-                  }
+                    title: "总计",
+                  };
                 }
-                data.guide.open = value
-              }
-            }
+                data.guide.open = value;
+              },
+            },
           },
           // {
           //   title: '标题文本',
@@ -83,14 +87,26 @@ export default {
           //     }
           //   }
           // },
-        ]
-      }
+        ],
+      },
     ];
 
-    cate1.title = "样式";
-    cate1.items = [];
+    cate1.title = "高级";
+    cate1.items = [
+      {
+        title: "升级",
+        type: "button",
+        value: {
+          set({ data, inputs, outputs }) {
+            if (output.get("afterrender")) {
+              return;
+            }
 
-    cate2.title = "动作";
-    cate2.items = [];
+            outputs.add("afterrender", "渲染完成", { type: "any" });
+            inputs.get("data").setRels(["afterrender"]);
+          },
+        },
+      },
+    ];
   },
 };

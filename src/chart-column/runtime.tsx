@@ -1,6 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { ChartStatus, LoadStatus } from "./../components/chart-status";
-import { useChart, getChartConfigFromData } from "./../utils/chart";
+import { useChart, getChartConfigFromData } from "./../utils/chartLine";
 import { ChartType, isGroupChart } from "./../types";
 import css from "./style.less";
 
@@ -18,6 +24,8 @@ export default function ({
   const [dataSource, setDataSource] = useState(env.edit ? mockData : []);
   const [status, setStatus] = useState(LoadStatus.IDLE);
 
+  const tickit = useRef(null);
+
   useMemo(() => {
     inputs["loading"]?.((bool) => {
       setStatus(LoadStatus.LOADING);
@@ -31,8 +39,10 @@ export default function ({
       setStatus(LoadStatus.ERROR);
     });
 
-    inputs["data"]((val) => {
+    inputs["data"]((val, outputRels) => {
       if (Array.isArray(val)) {
+        tickit.current = outputRels["afterrender"];
+
         setDataSource(val);
         setStatus(LoadStatus.IDLE);
       }
@@ -136,6 +146,15 @@ export default function ({
 
     chart.legend(...legend);
 
+    // 监听 afterrender 事件
+    chart.on("afterrender", () => {
+      console.log("图表渲染完成");
+      if (typeof tickit.current === "function") {
+        tickit.current();
+        tickit.current = null;
+      }
+    });
+
     chart.render();
   }, [
     chart,
@@ -146,11 +165,12 @@ export default function ({
     data.config.xField,
     data.config.yField,
     data.config?.legend,
-    
+
     data.config.xFieldScrollable,
     data.config.xFieldCount,
     data.config.xFieldRotate,
-    data.config.yFieldDisplay
+    data.config.yFieldDisplay,
+    tickit.current,
   ]);
 
   return (

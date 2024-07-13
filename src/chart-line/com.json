@@ -29,7 +29,8 @@
             }
           }
         }
-      }
+      },
+      "rels": ["afterrender"]
     },
     {
       "id": "loading",
@@ -56,5 +57,10 @@
       }
     }
   ],
-  "outputs": []
+  "outputs": [
+    {
+      "id": "afterrender",
+      "title": "渲染完成"
+    }
+  ]
 }

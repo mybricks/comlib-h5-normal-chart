@@ -78,5 +78,23 @@ export default {
         },
       },
     ];
+
+    cate1.title = "高级";
+    cate1.items = [
+      {
+        title: "升级",
+        type: "button",
+        value: {
+          set({ data, inputs, outputs }) {
+            if (output.get("afterrender")) {
+              return;
+            }
+
+            outputs.add("afterrender", "渲染完成", { type: "any" });
+            inputs.get("data").setRels(["afterrender"]);
+          },
+        },
+      },
+    ];
   },
 };

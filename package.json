@@ -1,6 +1,6 @@
 {
   "name": "@mybricks/ktaro-chart-lib",
-  "version": "0.0.14",
+  "version": "0.0.18",
   "description": "小程序图表组件库",
   "scripts": {
     "dev": "mybricks dev",
