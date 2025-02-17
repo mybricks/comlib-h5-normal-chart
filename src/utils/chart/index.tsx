@@ -46,8 +46,9 @@ const getCanvasInDesn = async (el: HTMLElement) => {
   const { width, height } = el.getBoundingClientRect();
   return Promise.resolve({
     el,
-    width,
-    height,
+    width: width,
+    height: height,
+    pixelRatio: 2,
   });
 };
 

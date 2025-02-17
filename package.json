@@ -1,6 +1,6 @@
 {
   "name": "@mybricks/ktaro-chart-lib",
-  "version": "0.0.18",
+  "version": "0.0.20",
   "description": "小程序图表组件库",
   "scripts": {
     "dev": "mybricks dev",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/react": "^18.0.0",
     "eslint": "^7.12.1",
-    "mybricks-cli": "^0.0.22",
+    "mybricks-cli": "^0.0.35",
     "typescript": "^4.8.4"
   },
   "resolutions": {
