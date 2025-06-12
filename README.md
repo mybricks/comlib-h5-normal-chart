@@ -1,4 +1,4 @@
-# mybricks 多端图表组件库
+# mybricks 多端图表组件库 
 
 支持 Vue、React、Taro 等
 
