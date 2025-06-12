@@ -1,6 +1,6 @@
 {
   "title": "环形进度图",
-  "namespace": "zdy-mybricks.taro.chart.ringProgress",
+  "namespace": "mybricks.taro.chart.ringProgress",
   "author": "mybricks-team",
   "author_name": "板砖团队",
   "icon": "./icon.svg",
