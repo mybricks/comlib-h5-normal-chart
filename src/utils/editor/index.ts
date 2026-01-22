@@ -62,6 +62,22 @@ export const getNormalDataEditors = (config) => {
         },
       },
       {
+        title: "x轴刻度线的条数",
+        description: "0显示全部",
+        type: "text",
+        options: {
+          type: "number",
+        },
+        value: {
+          get({ data }) {
+            return data.config.xFieldTickCount || 0;
+          },
+          set({ data }, value) {
+            data.config.xFieldTickCount = value;
+          },
+        },
+      },
+      {
         ifVisible({ data }) {
           return config.xFieldScrollable;
         },

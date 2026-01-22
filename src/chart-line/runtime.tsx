@@ -66,13 +66,17 @@ export default function ({
 
     chart.clear();
 
-    let sourceParams = {};
+    let sourceParams = {
+      [data.config.xField]: {
+        tickCount: data.config.xFieldTickCount || 0,
+      },
+    } as any;
     if (data.config.xFieldScrollable) {
-      sourceParams[data.config.xField] = {
-        values: (env.edit ? mockData : dataSource)
-          .slice(0, data.config.xFieldCount || 10)
-          .map((d) => d[data.config.xField]),
-      };
+      sourceParams[data.config.xField].values = (
+        env.edit ? mockData : dataSource
+      )
+        .slice(0, data.config.xFieldCount || 10)
+        .map((d) => d[data.config.xField]);
     }
 
     chart.source(env.edit ? mockData : dataSource, {
@@ -179,6 +183,10 @@ export default function ({
           outputs["onTooltipHide"]?.();
         },
       });
+    } else {
+      chart.tooltip({
+        showTitle: data.showTooltipTitle ?? false,
+      });
     }
 
     chart.legend(...legend);
@@ -211,6 +219,8 @@ export default function ({
     data.config.xFieldCount,
     data.config.xFieldRotate,
     data.config.yFieldDisplay,
+
+    data.config.xFieldTickCount,
 
     tickit.current,
   ]);
