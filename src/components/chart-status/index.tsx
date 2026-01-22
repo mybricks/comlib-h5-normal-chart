@@ -11,6 +11,7 @@ const Loading = () => {
 };
 
 export const ChartStatus = ({
+  env,
   className,
   children,
   status = LoadStatus.IDLE,
@@ -28,7 +29,7 @@ export const ChartStatus = ({
   // 监听容器尺寸变化
   let resizeTimer: any;
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !env.edit) return;
 
     // 使用 ResizeObserver 监听尺寸变化
     const resizeObserver = new ResizeObserver((entries) => {

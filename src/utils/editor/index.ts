@@ -62,6 +62,15 @@ export const getNormalDataEditors = (config) => {
         },
       },
       {
+        ifVisible({ data }) {
+          return [
+            ChartType.Column,
+            ChartType.ColumnStack,
+            ChartType.ColumnGroup,
+            ChartType.Line,
+            ChartType.LineMuti,
+          ].includes(data.type);
+        },
         title: "x轴刻度线的条数",
         description: "0显示全部",
         type: "text",

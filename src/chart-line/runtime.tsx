@@ -226,7 +226,7 @@ export default function ({
   ]);
 
   return (
-    <ChartStatus status={status} {...events} onResize={changeSize}>
+    <ChartStatus env={env} status={status} {...events} onResize={changeSize}>
       <Canvas className={css.chart_line} {...props} />
     </ChartStatus>
   );

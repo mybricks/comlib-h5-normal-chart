@@ -7,8 +7,7 @@
         "./src/chart-column/com.json",
         "./src/chart-line/com.json",
         "./src/chart-pie/com.json",
-        "./src/chart-radar/com.json",
-        "./src/chart-ringProgress/com.json"
+        "./src/chart-radar/com.json"
       ]
     }
   ],
